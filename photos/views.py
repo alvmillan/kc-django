@@ -6,7 +6,7 @@ from photos.models import Photo
 
 
 def latest_photos(request):
-    photos = Photo.objects.all().order_by('-modification_date')
+    photos = Photo.objects.filter(visibility=Photo.PUBLIC).order_by('-modification_date')
 
     context = {'latest_photos': photos[:5]}
 
@@ -16,7 +16,7 @@ def latest_photos(request):
 
 
 def photo_detail(request, pk):
-    photo = get_object_or_404(Photo, pk=pk)
+    photo = get_object_or_404(Photo, pk=pk, visibility=Photo.PUBLIC)
 
     context = {'photo': photo}
 
