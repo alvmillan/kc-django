@@ -10,6 +10,11 @@
         <h3>Frikr</h3>
         <nav>
             <a href="/" >Home</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}"> Logout</a>
+            {% else %}
+                <a href="{% url 'login' %}"> Login</a>
+            {% endif %}
         </nav>
     </header>
 
