@@ -5,6 +5,7 @@
 
 {% block main_content %}
     <img src="{{ photo.url }}" alt="{{photo.description}}" width="500" title="{{photo.name}}">
-    <p>Published on {{photo.creation_date|date:'d/m/Y'}} under {{ photo.get_license_display}} license.</p>
+    <p>Published on {{photo.creation_date|date:'d/m/Y'}} under {{ photo.get_license_display}} license
+        by {{ photo.owner.first_name}} {{ photo.owner.last_name}}</p>
     <p> {{ photo.description}}</p>
 {% endblock %}

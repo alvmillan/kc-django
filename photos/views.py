@@ -13,7 +13,7 @@ from photos.models import Photo
 class LatestPhotosView(View):
 
     def get(self, request):
-        photos = Photo.objects.filter(visibility=Photo.PUBLIC).order_by('-modification_date')
+        photos = Photo.objects.filter(visibility=Photo.PUBLIC).order_by('-modification_date').select_related('owner')
 
         context = {'latest_photos': photos[:5]}
 
@@ -23,7 +23,7 @@ class LatestPhotosView(View):
 
 class PhotoDetailView(View):
     def get(self, request, pk):
-        photo = get_object_or_404(Photo, pk=pk, visibility=Photo.PUBLIC)
+        photo = get_object_or_404(Photo.objects.select_related('owner'), pk=pk, visibility=Photo.PUBLIC)
 
         context = {'photo': photo}
 
