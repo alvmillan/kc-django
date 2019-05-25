@@ -10,7 +10,6 @@ def login(request):
     if request.user.is_authenticated:
         return redirect('home')
 
-    form = LoginForm()
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -21,7 +20,8 @@ def login(request):
                 messages.error(request, 'Usuario/contraseña incorrectos')
             else:
                 django_login(request, user)
-                return redirect('home')
+                url = request.GET.get('next', 'home')
+                return redirect(url)
     else:
         form = LoginForm()
 
